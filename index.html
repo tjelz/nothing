@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Message Encryption and Decryption</title>
+</head>
+<body>
+    <h1>Message Encryption and Decryption</h1>
+
+    <label for="message">Enter your message:</label>
+    <textarea id="message" rows="4" cols="50"></textarea><br>
+
+    <button onclick="encrypt()">Encrypt</button>
+    <button onclick="decrypt()">Decrypt</button><br>
+
+    <h2>Encrypted Message:</h2>
+    <p id="encryptedMessage"></p>
+
+    <h2>Decrypted Message:</h2>
+    <p id="decryptedMessage"></p>
+
+    <script>
+        // Hardcoded encryption key
+        const key = "FNgni4gn3iogn3oug@£Mfn3i";
+
+        function encrypt() {
+            const message = document.getElementById("message").value;
+            const encryptedMessage = customEncrypt(message, key);
+            document.getElementById("encryptedMessage").textContent = encryptedMessage;
+        }
+
+        function decrypt() {
+            const encryptedMessage = document.getElementById("encryptedMessage").textContent;
+            const decryptedMessage = customDecrypt(encryptedMessage, key);
+            document.getElementById("decryptedMessage").textContent = decryptedMessage;
+        }
+
+        function customEncrypt(text, key) {
+            let result = "";
+
+            for (let i = 0; i < text.length; i++) {
+                const charCode = text.charCodeAt(i);
+                const keyCharCode = key.charCodeAt(i % key.length);
+
+                const encryptedCharCode = charCode + keyCharCode;
+                result += String.fromCharCode(encryptedCharCode);
+            }
+
+            return result;
+        }
+
+        function customDecrypt(text, key) {
+            let result = "";
+
+            for (let i = 0; i < text.length; i++) {
+                const charCode = text.charCodeAt(i);
+                const keyCharCode = key.charCodeAt(i % key.length);
+
+                const decryptedCharCode = charCode - keyCharCode;
+                result += String.fromCharCode(decryptedCharCode);
+            }
+
+            return result;
+        }
+    </script>
+</body>
+</html>
